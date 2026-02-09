@@ -1,0 +1,36 @@
+# Core
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Image Processing
+opencv-python>=4.8.0
+Pillow>=10.0.0
+scikit-image>=0.21.0
+
+# DXF Generation
+ezdxf>=1.1.0
+
+# Configuration
+PyYAML>=6.0
+
+# CLI
+click>=8.1.0
+rich>=13.0.0
+
+# Visualization
+matplotlib>=3.7.0
+
+# Web Interface
+streamlit>=1.30.0
+streamlit-image-coordinates>=0.1.0
+
+# Logging
+colorlog>=6.7.0
+
+# Optional: Smoother vectorization (may require system potrace library)
+# pypotrace>=0.2.0
+
+# Development
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0

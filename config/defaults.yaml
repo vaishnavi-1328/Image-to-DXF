@@ -1,0 +1,97 @@
+# Image Classification
+classification:
+  edge_density_threshold: 0.15  # Photo if > threshold
+  gradient_variance_threshold: 50.0
+
+# Preprocessing - Photos
+photo_preprocessing:
+  bilateral_filter:
+    d: 9
+    sigma_color: 75
+    sigma_space: 75
+  clahe:
+    clip_limit: 2.0
+    tile_grid_size: [8, 8]
+  adaptive_threshold:
+    block_size: 11
+    C: 2
+  morphology:
+    kernel_size: 3
+    closing_iterations: 2
+
+# Preprocessing - Drawings
+drawing_preprocessing:
+  median_filter_size: 3
+  morphology:
+    kernel_size: 2
+    opening_iterations: 1
+
+# Edge Detection
+edge_detection:
+  gaussian_blur_sigma: 1.0
+  canny_low_threshold: 50
+  canny_high_threshold: 150
+  morphological_closing: true
+
+# Contour Extraction
+contour_extraction:
+  min_contour_area_pixels: 100
+  retrieval_mode: "RETR_CCOMP"  # or RETR_TREE
+  approximation_mode: "CHAIN_APPROX_SIMPLE"
+
+# Vectorization
+vectorization:
+  use_potrace: false  # Set true if pypotrace installed
+  simplify_epsilon_mm: 0.05
+  detect_circles: true
+  circle_tolerance: 0.02  # How close to perfect circle
+  detect_arcs: true
+  arc_tolerance: 0.05
+
+# Validation
+validation:
+  min_feature_size_mm: 1.0
+  max_entity_count: 10000
+  check_self_intersections: true
+  allow_open_paths: false
+
+# DXF Output
+dxf_output:
+  version: "R2010"  # or R2000
+  units: 4  # Millimeters
+  layer_name: "CutLines"
+  layer_color: 1  # Red
+  coordinate_precision: 3  # Decimal places
+
+# Scale
+scale:
+  default_dpi: 96  # If no scale provided
+  reference_dimension_mm: null  # User can provide known dimension
+  pixels_per_mm: null  # Will be calculated from DPI or reference
+
+# Perspective Correction
+perspective_correction:
+  enabled: false  # Default off, user must opt-in
+  max_output_megapixels: 2.0  # Adaptive resolution cap
+  interpolation_downsize: "CUBIC"  # Higher quality for downsizing
+  interpolation_upsize: "LINEAR"  # Faster for upsizing
+  validate_quadrilateral: true
+  min_angle_degrees: 15  # Reject if corners too acute
+  aspect_ratio_tolerance: 0.3  # Warn if mismatch > 30%
+  min_transformation_determinant: 0.01
+  max_transformation_determinant: 100.0
+  display_max_dimension: 1200  # For point selection UI
+
+# Preview
+preview:
+  generate_previews: true
+  save_intermediate_images: true
+  show_rejected_contours: true
+  overlay_on_original: true
+  output_dir: "output"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  log_file: "output/processing.log"
+  console_output: true
